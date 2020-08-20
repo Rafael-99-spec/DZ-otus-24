@@ -1,0 +1,6 @@
+[Unit]
+Description=Start backup script
+
+[Service]
+Type=oneshot
+ExecStart=/bin/sh /vagrant/backup.sh
