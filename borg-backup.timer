@@ -1,0 +1,12 @@
+[Unit]
+Description=Run required service once in 5 minute
+
+[Timer]
+OnActiveSec=0sec
+OnBootSec=1min
+OnCalendar=*:*:5/0
+AccuracySec=1us
+Unit=borg-backup.service
+
+[Install]
+WantedBy=multi-user.target
