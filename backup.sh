@@ -24,4 +24,4 @@ borg create -v --stats                          \
 # limit prune's operation to this machine's archives and not apply to
 # other machine's archives also.
 borg prune -v --list $REPOSITORY --prefix '{hostname}-' \
-    --keep-daily=7 --keep-weekly=4 --keep-monthly=6
+    --keep-daily=7 --keep-weekly=1 --keep-monthly=1
