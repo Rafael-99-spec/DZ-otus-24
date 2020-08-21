@@ -3,10 +3,10 @@
 REPOSITORY=192.168.111.10:/var/backup
 
 #Bail if borg is already running, maybe previous run didn't finish
-if pidof -x borg >/dev/null; then
-    echo "Backup already running"
-    exit
-fi
+#if pidof -x borg >/dev/null; then
+#    echo "Backup already running"
+#    exit
+#fi
 
 # Setting this, so you won't be asked for your repository passphrase:
 export BORG_PASSPHRASE='123456789'
@@ -24,4 +24,4 @@ borg create -v --stats                          \
 # limit prune's operation to this machine's archives and not apply to
 # other machine's archives also.
 borg prune -v --list $REPOSITORY --prefix '{hostname}-' \
-    --keep-daily=7 --keep-weekly=1 --keep-monthly=1
+    --keep-daily=7 --keep-weekly=4 --keep-monthly=6
