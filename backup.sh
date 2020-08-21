@@ -25,3 +25,5 @@ borg create -v --stats                          \
 # other machine's archives also.
 borg prune -v --list $REPOSITORY --prefix '{hostname}-' \
     --keep-daily=7 --keep-weekly=4 --keep-monthly=6
+
+journalctl -u borg-backup.service -n 35 > borg.log
