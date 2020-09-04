@@ -13,7 +13,7 @@ MACHINES = {
 	             	},
 		            :sata2 => {
                         :dfile => './sata2.vdi',
-                        :size => 4, # Megabytes
+                        :size => 2048, # Megabytes
 			                  :port => 2
 		            },
 	}
@@ -66,10 +66,10 @@ Vagrant.configure("2") do |config|
             s.vm.hostname = 'server'
             #s.vm.network "private_network", ip: "192.168.111.10"
             s.vm.provision "shell", inline: <<-SHELL
-            yum install -y epel-release wget nano && yum install -y borgbackup
-            echo "toor" | passwd root --stdin
+            yum install -y epel-release && yum install -y borgbackup wget nano             
             sed -i 's/PasswordAuthentication no/PasswordAuthentication yes/g' /etc/ssh/sshd_config
             sed -i 's/#PermitRootLogin yes/PermitRootLogin yes/g' /etc/ssh/sshd_config
+            echo "toor" | passwd root --stdin
             systemctl restart sshd
             timedatectl set-timezone Europe/Kaliningrad
             SHELL
@@ -84,6 +84,6 @@ Vagrant.configure("2") do |config|
             echo "toor" | passwd root --stdin
             timedatectl set-timezone Europe/Kaliningrad
             SHELL
-        end
-  end
+        end             
+  end                                                 
 end
