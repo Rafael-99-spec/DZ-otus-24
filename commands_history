@@ -122,3 +122,18 @@
    19  ll 0/
    20  cat 0/1
    21  history
+
+
+			server with startup parameters configured
+			
+    1  lsblk
+    2  mkfs.ext4 -F /dev/sdb
+    3  mkdir /var/backup
+    4  mount -t ext4 /dev/sda /var/backup
+    5  blkid /dev/sdb
+    6  nano /etc/fstab
+    7  df -hT
+    8  mount -t ext4 /dev/sdb /var/backup
+    9  df -hT
+   10  nano /etc/fstab
+   11  reboot 0
