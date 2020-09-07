@@ -1,0 +1,124 @@
+			client
+
+    1  borg --help
+    2  ssh-keyhen
+    3  ssh-keygen
+    4  ssh-copy-id root@192.168.111.10
+    5  ssh root@192.168.111.10
+    6  cd vag
+    7  cd /vagrant/
+    8  ll
+    9  chmod +x backup-new.sh 
+   10  nano backup-new.sh 
+   11  ./backup-new.sh 
+   12  exit
+   13  cd /vagrant/
+   14  ll
+   15  nano backup-new.sh 
+   16  ./backup-new.sh 
+   17  chmod +x backup-new.sh 
+   18  ./backup-new.sh 
+   19  nano backup-new.sh 
+   20  ./backup-new.sh 
+   21  ssh root@192.168.111.10
+   22  borg -> /usr/local/bin/borg
+   24  which borg
+
+    1  ssh-keygen
+    2  ssh-copy-id root@192.168.111.10
+    3  cd /vagrant/
+    4  nano backup-new.sh 
+    5  nano backup.sh 
+    6  history
+    7  ssh root@192.168.111.10
+    8  borg init -e repokey-blake2 192.168.111.10:/var/backup
+    9  borg key export
+   10  borg key export 192.168.111.10:/var/backup
+   11  chmod +x /vagrant/backup.sh 
+   12  cd /vagrant/
+   13  ./backup.sh 
+   
+   40  history
+   41  borg extract --list /var/backup::client-2020-08-20-10-49
+   42  cp /vagrant/borg-backup.service /etc/systemd/system/borg-backup.service
+   43  cp /vagrant/borg-backup.timer /etc/systemd/system/borg-backup.timer
+   44  systemctl enable borg-backup.service
+   45  systemctl enable borg-backup.timer
+   46  systemctl start borg-backup.service
+   47  systemctl start borg-backup.timer
+   48  borg init -e repokey-blake2 root@192.168.111.10:/var/backup
+ 
+
+
+    1  ssh-keygen
+    2  ssh-copy-id root@192.168.111.10
+    3  ssh 'root@192.168.111.10'
+    4  cd /vagrant/
+    5  chmod +x backup.sh 
+    6  ll
+    7  cat borg-backup.service 
+    8  cat backup.sh 
+    9  history
+   10  borg init -e repokey-blake2 192.168.111.10:/var/backup
+   11  borg key export 192.168.111.10:/var/backup
+   12  ll
+   13  cp /vagrant/borg-backup.service /etc/systemd/system/borg-backup.service
+   14  cp /vagrant/borg-backup.timer /etc/systemd/system/borg-backup.timer
+   15  systemctl enable borg-backup.service
+   16  systemctl enable borg-backup.timer
+   17  systemctl start borg-backup.service
+   18  systemctl start borg-backup.timer
+   19  watch journalctl -u borg-backup.service -n 35
+
+
+
+
+
+
+			server
+
+    8  fdisk /dev/sdb
+    9  lsblk
+   10  fdisk /dev/sdb
+   11  lsblk
+   12  history
+       mkfs.ext4 -F /dev/sda
+   14  fdisk -l
+   15  mount -t ext4 /dev/sdb1 /var/backup
+   16  df -hT
+   17  reboot
+   18  fdisk -l
+   19  cat .etc.fstab
+   20  cat /etc/fstab
+   21  exit
+       blkid /dev/sda
+   23  nano /etc/fstab
+   24  yum install nano -t
+   25  nano /etc/fstab
+   26  df -hT
+   27  fdisk -l
+   28  history
+   29  mount -t ext4 /dev/sdb1 /var/backup
+   30  nano /etc/fstab
+   31  df -hT
+   32  reboot
+   33  df -hT
+    3  nano /etc/ssh/sshd_config 
+    4  systemctl restart sshd
+    5  mkdir /var/backup
+    6  ll /var/backup/
+    7  chmod 755 /var/backup/
+    8  wich borg
+    9  which borg
+   10  ln -s borg /usr/bin/borg
+   11  history
+   12  ll /var/backup/
+   13  ll /var/backup/data/
+   14  ll /var/backup/
+   15  cd /var/backup/
+   16  cd data/
+   17  ll
+   18  cat 0/
+   19  ll 0/
+   20  cat 0/1
+   21  history
