@@ -185,22 +185,12 @@ Sep 08 18:05:02 client sh[4039]: Time (end):   Tue, 2020-09-08 18:05:01
 Для окончательной проверки создадим какой-нибудь документ, подождем минут 6, пока не получим бекап с новосозданным документом. Потом удалим данный файл, и попробуем восстановить его из последнего бекапа. Данным способом мы будем имитировать ситуацию в которой сисадмин случайно удалил важный файл и ему необходимо как можно быстрее его востановить, и сделает он это с помошью резервной копии всей директории /etc.
 Например создаем файл important_ip_addresses
 ```
-[root@client vagrant]# > /etc/ssh/ssh
-ssh_config                ssh_host_ecdsa_key        ssh_host_ed25519_key      ssh_host_rsa_key          
-sshd_config               ssh_host_ecdsa_key.pub    ssh_host_ed25519_key.pub  ssh_host_rsa_key.pub      
-[root@client vagrant]# > /etc/ssh/important_ip_addresses
-[root@client vagrant]# ll /etc/ssh/
-total 604
--rw-r--r--. 1 root root          0 Sep  8 21:11 important_ip_addresses
--rw-r--r--. 1 root root     581843 Aug  9  2019 moduli
--rw-r--r--. 1 root root       2276 Aug  9  2019 ssh_config
--rw-r-----. 1 root ssh_keys    227 Sep  8 20:22 ssh_host_ecdsa_key
--rw-r--r--. 1 root root        162 Sep  8 20:22 ssh_host_ecdsa_key.pub
--rw-r-----. 1 root ssh_keys    387 Sep  8 20:22 ssh_host_ed25519_key
--rw-r--r--. 1 root root         82 Sep  8 20:22 ssh_host_ed25519_key.pub
--rw-r-----. 1 root ssh_keys   1679 Sep  8 20:22 ssh_host_rsa_key
--rw-r--r--. 1 root root        382 Sep  8 20:22 ssh_host_rsa_key.pub
--rw-------. 1 root root       3916 Apr 30 22:09 sshd_config
+[root@client vagrant]# echo "192.168.111.10;192.168.111.11" > /etc/important_ip_addresses
+[root@client vagrant]# ll /etc/important_ip_addresses 
+-rw-r--r--. 1 root root 30 Sep  8 21:59 /etc/important_ip_addresses
+```
+Подождем минут 10, удалим наш файл и службы, после чего приступим к восстановлению резервной копии папки /etc.
+```
 [root@client vagrant]# rm -r /etc/ssh/important_ip_addresses 
 rm: remove regular empty file '/etc/ssh/important_ip_addresses'? y
 [root@client vagrant]# systemctl stop borg-backup.service
