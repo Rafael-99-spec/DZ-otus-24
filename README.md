@@ -124,7 +124,9 @@ Created symlink from /etc/systemd/system/multi-user.target.wants/borg-backup.tim
 [root@client vagrant]# systemctl start borg-backup.timer
 ```
 Отмечу сразу, что логирование у нах работает с помощью systemd-утилиты journalctl(команда journalctl -u ```borg-backup.service -n 65 > /var/log/borg.log ``` прописанная в backup.sh) 
-Проверим работу нашего демона borg-backup.service. Ниже по 1-му выводу можно заметить, что каждый название каждого бекапа содержит название хоста(откуда получаем бекап), а также дату и время создания бекапа;  
+Проверим работу нашего демона borg-backup.service. 
+
+Ниже по 1-му выводу можно заметить, что каждый название каждого бекапа содержит название хоста(откуда получаем бекап), а также дату и время создания бекапа;  
 ```
 [root@server vagrant]# borg list /var/backup/
 Enter passphrase for key /var/backup: 
