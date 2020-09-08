@@ -130,7 +130,7 @@ Created symlink from /etc/systemd/system/multi-user.target.wants/borg-backup.tim
 ```
 [root@server vagrant]# borg list /var/backup/
 Enter passphrase for key /var/backup: 
-client-2020-09-08-15-45              Tue, 2020-09-08 17:45:01 [7cc4ec39f8852237d2d773297306260e29a5e071c2fcd98a85af9ea0d426c734]
+client-2020-09-08-17-55              Tue, 2020-09-08 17:55:01 [2ad5bf6d9f1e06e497b6624eb88c8bb0a46ef17ff9980ac121c12a58b4b4fe9d]
 ```
 А по 2-му выводу, можем удостовериться, что бекап делается, каждые 5 минут
 ```
