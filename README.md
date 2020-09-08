@@ -85,11 +85,42 @@ Write down the passphrase. Store both at safe place(s).
 [root@client vagrant]# borg key export root@192.168.111.10:/var/backup
 output file to export key to expected
 ```
+Далее создаем два systemd service и timer юнита, первый юнит предназначен для запуска самого баш-скрипта backup.sh, а второй юнит для запуска .service юнита каждые 5 минут. Оба файла выглядат след. образом
+borg-backup.service
+```
+[root@client vagrant]# cat borg-backup.service 
+[Unit]
+Description=Start backup script
 
+[Service]
+Type=oneshot
+ExecStart=/bin/sh /vagrant/backup.sh
+```
+borg-backup.timer
+```
+[root@client vagrant]# cat borg-backup.timer 
+[Unit]
+Description=Run required service once in 5 minute
 
+[Timer]
+OnActiveSec=0sec
+OnBootSec=1min
+OnCalendar=*:0/5
+AccuracySec=1us
+Unit=borg-backup.service
 
-
-
-
-
-
+[Install]
+WantedBy=multi-user.target
+[root@client vagrant]# 
+```
+Теперь приступим к созданию юнитов, к их запуску и настройке для автозапуска во время запуска самой системы
+```
+[root@client vagrant]# cp /vagrant/borg-backup.service /etc/systemd/system/borg-backup.service
+[root@client vagrant]# cp /vagrant/borg-backup.timer /etc/systemd/system/borg-backup.timer
+[root@client vagrant]# systemctl enable borg-backup.service
+[root@client vagrant]# systemctl enable borg-backup.timer
+Created symlink from /etc/systemd/system/multi-user.target.wants/borg-backup.timer to /etc/systemd/system/borg-backup.timer.
+[root@client vagrant]# systemctl start borg-backup.service
+[root@client vagrant]# systemctl start borg-backup.timer
+```
+Отмечу сразу, что логирование у нах работает с помощью systemd-утилиты journalctl(команда journalctl -u ```borg-backup.service -n 65 > /var/log/borg.log ``` прописанная в backup.sh) 
