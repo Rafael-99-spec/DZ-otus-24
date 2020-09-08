@@ -191,28 +191,17 @@ Sep 08 18:05:02 client sh[4039]: Time (end):   Tue, 2020-09-08 18:05:01
 ```
 Подождем минут 10, удалим наш файл и службы, после чего приступим к восстановлению резервной копии папки /etc.
 ```
-[root@client vagrant]# rm -r /etc/ssh/important_ip_addresses 
-rm: remove regular empty file '/etc/ssh/important_ip_addresses'? y
-[root@client vagrant]# systemctl stop borg-backup.service
-Warning: Stopping borg-backup.service, but it can still be activated by:
-  borg-backup.timer
 [root@client vagrant]# systemctl stop borg-backup.timer
-[root@client vagrant]# ll /etc/ssh/
-total 604
--rw-r--r--. 1 root root     581843 Aug  9  2019 moduli
--rw-r--r--. 1 root root       2276 Aug  9  2019 ssh_config
--rw-r-----. 1 root ssh_keys    227 Sep  8 20:22 ssh_host_ecdsa_key
--rw-r--r--. 1 root root        162 Sep  8 20:22 ssh_host_ecdsa_key.pub
--rw-r-----. 1 root ssh_keys    387 Sep  8 20:22 ssh_host_ed25519_key
--rw-r--r--. 1 root root         82 Sep  8 20:22 ssh_host_ed25519_key.pub
--rw-r-----. 1 root ssh_keys   1679 Sep  8 20:22 ssh_host_rsa_key
--rw-r--r--. 1 root root        382 Sep  8 20:22 ssh_host_rsa_key.pub
--rw-------. 1 root root       3916 Apr 30 22:09 sshd_config
+[root@client vagrant]# systemctl stop borg-backup.service
+[root@client vagrant]# rm -r /etc/important_ip_addresses 
+rm: remove regular file '/etc/important_ip_addresses'? y
+[root@client vagrant]# 
 ```
 Восстановим копию папки /etc из borgbackup 
 ```
-[root@client vagrant]# borg key export 192.168.111.10:/var/backup
-output file to export key to expected
+[root@client vagrant]# borg list 192.168.111.10:/var/backup
+Enter passphrase for key ssh://192.168.111.10/var/backup: 
+client-2020-09-08-22-10              Tue, 2020-09-08 22:10:00 [dd25863e2246b42a45dc6a5095e37d00ad6b8e9bb542753e3f3667d9d28a5892]
 [root@client vagrant]# borg extract --list 192.168.111.10:/var/backup::client-2020-09-08-21-10
 Enter passphrase for key ssh://192.168.111.10/var/backup: 
 etc
