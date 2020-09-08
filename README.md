@@ -82,6 +82,8 @@ See https://borgbackup.readthedocs.io/en/stable/changes.html#pre-1-0-9-manifest-
 IMPORTANT: you will need both KEY AND PASSPHRASE to access this repo!
 Use "borg key export" to export the key, optionally in printable format.
 Write down the passphrase. Store both at safe place(s).
+[root@client vagrant]# borg key export root@192.168.111.10:/var/backup
+output file to export key to expected
 ```
 
 
