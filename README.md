@@ -17,5 +17,77 @@ tmpfs          tmpfs     496M     0  496M   0% /sys/fs/cgroup
 tmpfs          tmpfs     100M     0  100M   0% /run/user/1000
 ```
 - Далее перейдем на нашу клиентскую машину, откуда будем настроивать у резервное копирование на бекап-сервер.
+- Для резервоного копирования будем использовать утилиту borgbackup . Для работы бекап сервера через borgbackup нам нужно будет включить ssh, причем репозиторий наш будет зашифрован, и поэтому цельях безпоасности будем использовать ssh-ключи, следовательно сгенерируем открытый и закрытый ключи, и сразу скопируем на наш бекап-сервер(то-есть на ВМ - server).
+```
+[root@client vagrant]# ssh-keygen
+Generating public/private rsa key pair.
+Enter file in which to save the key (/root/.ssh/id_rsa): 
+Enter passphrase (empty for no passphrase): 
+Enter same passphrase again: 
+Your identification has been saved in /root/.ssh/id_rsa.
+Your public key has been saved in /root/.ssh/id_rsa.pub.
+The key fingerprint is:
+SHA256:Y822YnsdsipH/sdp4H5IbWOnf94aoI+FDxP8eGcWVhs root@client
+The key's randomart image is:
++---[RSA 2048]----+
+|                 |
+|                 |
+|               E.|
+|         +     .o|
+|        S *.. o. |
+|       ..o+B*o.. |
+|       oooBX+*=  |
+|      ..oo=OO+ .o|
+|       oo=++o.o+o|
++----[SHA256]-----+
+[root@client vagrant]# ssh-copy-id root@192.168.111.10
+/usr/bin/ssh-copy-id: INFO: Source of key(s) to be installed: "/root/.ssh/id_rsa.pub"
+The authenticity of host '192.168.111.10 (192.168.111.10)' can't be established.
+ECDSA key fingerprint is SHA256:8CxxfxZBocJXtMKMhBEvt1nkHfv5+aFm4m607jSuKlM.
+ECDSA key fingerprint is MD5:eb:64:e3:a8:ab:b1:08:62:0d:67:b2:5b:70:f1:ca:39.
+Are you sure you want to continue connecting (yes/no)? yes
+/usr/bin/ssh-copy-id: INFO: attempting to log in with the new key(s), to filter out any that are already installed
+/usr/bin/ssh-copy-id: INFO: 1 key(s) remain to be installed -- if you are prompted now it is to install the new keys
+root@192.168.111.10's password: 
+
+Number of key(s) added: 1
+
+Now try logging into the machine, with:   "ssh 'root@192.168.111.10'"
+and check to make sure that only the key(s) you wanted were added.
+
+[root@client vagrant]# 
+```
+Далее перемещаемся в директорию /vagrant, тут лежит скрипт, который предназначен запуска бекапов, в определенное время каждый день. Сразу разрешим выполнение bash-скрипта.
+```
+[root@client vagrant]# cd /vagrant/
+[root@client vagrant]# chmod +x backup.sh
+```
+После этого приступим к важнейшим шагам. Создадим репозиторию на удаленном бекап-сервере(ВМ - server). Далее экспортируем наш ключ сразу в наш удаленный репозиторий.
+```
+[root@client vagrant]# borg init -e repokey-blake2 192.168.111.10:/var/backup
+Enter new passphrase: 
+Enter same passphrase again: 
+Do you want your passphrase to be displayed for verification? [yN]: y
+Your passphrase (between double-quotes): "123456789"
+Make sure the passphrase displayed above is exactly what you wanted.
+
+By default repositories initialized with this version will produce security
+errors if written to with an older version (up to and including Borg 1.0.8).
+
+If you want to use these older versions, you can disable the check by running:
+borg upgrade --disable-tam ssh://192.168.111.10/var/backup
+
+See https://borgbackup.readthedocs.io/en/stable/changes.html#pre-1-0-9-manifest-spoofing-vulnerability for details about the security implications.
+
+IMPORTANT: you will need both KEY AND PASSPHRASE to access this repo!
+Use "borg key export" to export the key, optionally in printable format.
+Write down the passphrase. Store both at safe place(s).
+```
+
+
+
+
+
+
 
 
