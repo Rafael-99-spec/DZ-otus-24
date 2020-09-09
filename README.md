@@ -2644,3 +2644,74 @@ total 0
 -rw-r--r--. 1 root root 0 Sep  9 09:13 5
 ```
 Хотел бы отметить, что по описанию ДЗ можно заметить большие отрывы между датами, судья по названию бекапов. Связано это с тем, что я не успел сделать ДЗ за 1 день.
+Логи моего borg-backup демона прописываются самым простым образом. В баш-файле backup.sh есть команда - ```journalctl -u borg-backup.service -n 65 > borg.log```, которая перенаправляет вывод journalctl в лог файл borg.log.
+```
+[root@client /]# cat /borg.log 
+-- Logs begin at Wed 2020-09-09 09:08:47 EET, end at Wed 2020-09-09 09:20:03 EET. --
+Sep 09 09:09:53 client sh[2641]: Keeping archive: client-2020-09-09-09-09              Wed, 2020-09-09 09:09:23 [1f421766a3511dfe33c66d7dfc8b460a62a0c6940d330dd6656a9f38babab5ec]
+Sep 09 09:09:53 client sh[2641]: Keeping archive: client-2020-09-08-18-05              Tue, 2020-09-08 18:05:01 [c15c18927d89d9d6ae57a556a9a7eafbd9e889831ea84057bf6b6833e124dbd6]
+Sep 09 09:09:53 client systemd[1]: Started Start backup script.
+Sep 09 09:10:00 client systemd[1]: Starting Start backup script...
+Sep 09 09:10:06 client sh[2656]: Creating archive at "192.168.111.10:/var/backup::{hostname}-{now:%Y-%m-%d-%H-%M}"
+Sep 09 09:10:06 client sh[2656]: ------------------------------------------------------------------------------
+Sep 09 09:10:06 client sh[2656]: Archive name: client-2020-09-09-09-10
+Sep 09 09:10:06 client sh[2656]: Archive fingerprint: a7223834ee1c28b62218210a2d51ff914bd15d6404d2ae58e227e356c00725a4
+Sep 09 09:10:06 client sh[2656]: Time (start): Wed, 2020-09-09 09:10:06
+Sep 09 09:10:06 client sh[2656]: Time (end):   Wed, 2020-09-09 09:10:06
+Sep 09 09:10:06 client sh[2656]: Duration: 0.74 seconds
+Sep 09 09:10:06 client sh[2656]: Number of files: 1707
+Sep 09 09:10:06 client sh[2656]: Utilization of max. archive size: 0%
+Sep 09 09:10:06 client sh[2656]: ------------------------------------------------------------------------------
+Sep 09 09:10:06 client sh[2656]: Original size      Compressed size    Deduplicated size
+Sep 09 09:10:06 client sh[2656]: This archive:               32.25 MB             14.98 MB             62.20 kB
+Sep 09 09:10:06 client sh[2656]: All archives:               96.76 MB             44.93 MB             11.95 MB
+Sep 09 09:10:06 client sh[2656]: Unique chunks         Total chunks
+Sep 09 09:10:06 client sh[2656]: Chunk index:                    1291                 5135
+Sep 09 09:10:06 client sh[2656]: ------------------------------------------------------------------------------
+Sep 09 09:10:08 client sh[2656]: Keeping archive: client-2020-09-09-09-10              Wed, 2020-09-09 09:10:06 [a7223834ee1c28b62218210a2d51ff914bd15d6404d2ae58e227e356c00725a4]
+Sep 09 09:10:08 client sh[2656]: Pruning archive: client-2020-09-09-09-09              Wed, 2020-09-09 09:09:23 [1f421766a3511dfe33c66d7dfc8b460a62a0c6940d330dd6656a9f38babab5ec] (1/1)
+Sep 09 09:10:08 client sh[2656]: Keeping archive: client-2020-09-08-18-05              Tue, 2020-09-08 18:05:01 [c15c18927d89d9d6ae57a556a9a7eafbd9e889831ea84057bf6b6833e124dbd6]
+Sep 09 09:10:08 client systemd[1]: Started Start backup script.
+Sep 09 09:15:00 client systemd[1]: Starting Start backup script...
+Sep 09 09:15:03 client sh[2895]: Creating archive at "192.168.111.10:/var/backup::{hostname}-{now:%Y-%m-%d-%H-%M}"
+Sep 09 09:15:03 client sh[2895]: ------------------------------------------------------------------------------
+Sep 09 09:15:03 client sh[2895]: Archive name: client-2020-09-09-09-15
+Sep 09 09:15:03 client sh[2895]: Archive fingerprint: 294203ca51d7cae5f5b72d901ceb1f352836c8e6805876160e6782dcac47021d
+Sep 09 09:15:03 client sh[2895]: Time (start): Wed, 2020-09-09 09:15:03
+Sep 09 09:15:03 client sh[2895]: Time (end):   Wed, 2020-09-09 09:15:03
+Sep 09 09:15:03 client sh[2895]: Duration: 0.53 seconds
+Sep 09 09:15:03 client sh[2895]: Number of files: 1712
+Sep 09 09:15:03 client sh[2895]: Utilization of max. archive size: 0%
+Sep 09 09:15:03 client sh[2895]: ------------------------------------------------------------------------------
+Sep 09 09:15:03 client sh[2895]: Original size      Compressed size    Deduplicated size
+Sep 09 09:15:03 client sh[2895]: This archive:               32.25 MB             14.98 MB             62.42 kB
+Sep 09 09:15:03 client sh[2895]: All archives:               96.76 MB             44.93 MB             11.95 MB
+Sep 09 09:15:03 client sh[2895]: Unique chunks         Total chunks
+Sep 09 09:15:03 client sh[2895]: Chunk index:                    1291                 5135
+Sep 09 09:15:03 client sh[2895]: ------------------------------------------------------------------------------
+Sep 09 09:15:05 client sh[2895]: Keeping archive: client-2020-09-09-09-15              Wed, 2020-09-09 09:15:03 [294203ca51d7cae5f5b72d901ceb1f352836c8e6805876160e6782dcac47021d]
+Sep 09 09:15:05 client sh[2895]: Pruning archive: client-2020-09-09-09-10              Wed, 2020-09-09 09:10:06 [a7223834ee1c28b62218210a2d51ff914bd15d6404d2ae58e227e356c00725a4] (1/1)
+Sep 09 09:15:05 client sh[2895]: Keeping archive: client-2020-09-08-18-05              Tue, 2020-09-08 18:05:01 [c15c18927d89d9d6ae57a556a9a7eafbd9e889831ea84057bf6b6833e124dbd6]
+Sep 09 09:15:05 client systemd[1]: Started Start backup script.
+Sep 09 09:20:00 client systemd[1]: Starting Start backup script...
+Sep 09 09:20:01 client sh[3218]: Creating archive at "192.168.111.10:/var/backup::{hostname}-{now:%Y-%m-%d-%H-%M}"
+Sep 09 09:20:02 client sh[3218]: ------------------------------------------------------------------------------
+Sep 09 09:20:02 client sh[3218]: Archive name: client-2020-09-09-09-20
+Sep 09 09:20:02 client sh[3218]: Archive fingerprint: 3314823ea68730cf3139d4b249dd5435044e64a4d4ad31cc5c18062c7bc8cd6e
+Sep 09 09:20:02 client sh[3218]: Time (start): Wed, 2020-09-09 09:20:01
+Sep 09 09:20:02 client sh[3218]: Time (end):   Wed, 2020-09-09 09:20:01
+Sep 09 09:20:02 client sh[3218]: Duration: 0.38 seconds
+Sep 09 09:20:02 client sh[3218]: Number of files: 1712
+Sep 09 09:20:02 client sh[3218]: Utilization of max. archive size: 0%
+Sep 09 09:20:02 client sh[3218]: ------------------------------------------------------------------------------
+Sep 09 09:20:02 client sh[3218]: Original size      Compressed size    Deduplicated size
+Sep 09 09:20:02 client sh[3218]: This archive:               32.25 MB             14.98 MB             26.47 kB
+Sep 09 09:20:02 client sh[3218]: All archives:               96.76 MB             44.93 MB             11.92 MB
+Sep 09 09:20:02 client sh[3218]: Unique chunks         Total chunks
+Sep 09 09:20:02 client sh[3218]: Chunk index:                    1290                 5135
+Sep 09 09:20:02 client sh[3218]: ------------------------------------------------------------------------------
+Sep 09 09:20:03 client sh[3218]: Keeping archive: client-2020-09-09-09-20              Wed, 2020-09-09 09:20:01 [3314823ea68730cf3139d4b249dd5435044e64a4d4ad31cc5c18062c7bc8cd6e]
+Sep 09 09:20:03 client sh[3218]: Pruning archive: client-2020-09-09-09-15              Wed, 2020-09-09 09:15:03 [294203ca51d7cae5f5b72d901ceb1f352836c8e6805876160e6782dcac47021d] (1/1)
+Sep 09 09:20:03 client sh[3218]: Keeping archive: client-2020-09-08-18-05              Tue, 2020-09-08 18:05:01 [c15c18927d89d9d6ae57a556a9a7eafbd9e889831ea84057bf6b6833e124dbd6]
+[root@client /]# 
+```
