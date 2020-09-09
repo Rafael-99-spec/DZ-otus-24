@@ -2649,7 +2649,6 @@ total 0
 [root@client /]# cat /borg.log 
 -- Logs begin at Wed 2020-09-09 09:08:47 EET, end at Wed 2020-09-09 09:20:03 EET. --
 Sep 09 09:09:53 client sh[2641]: Keeping archive: client-2020-09-09-09-09              Wed, 2020-09-09 09:09:23 [1f421766a3511dfe33c66d7dfc8b460a62a0c6940d330dd6656a9f38babab5ec]
-Sep 09 09:09:53 client sh[2641]: Keeping archive: client-2020-09-08-18-05              Tue, 2020-09-08 18:05:01 [c15c18927d89d9d6ae57a556a9a7eafbd9e889831ea84057bf6b6833e124dbd6]
 Sep 09 09:09:53 client systemd[1]: Started Start backup script.
 Sep 09 09:10:00 client systemd[1]: Starting Start backup script...
 Sep 09 09:10:06 client sh[2656]: Creating archive at "192.168.111.10:/var/backup::{hostname}-{now:%Y-%m-%d-%H-%M}"
@@ -2670,7 +2669,6 @@ Sep 09 09:10:06 client sh[2656]: Chunk index:                    1291           
 Sep 09 09:10:06 client sh[2656]: ------------------------------------------------------------------------------
 Sep 09 09:10:08 client sh[2656]: Keeping archive: client-2020-09-09-09-10              Wed, 2020-09-09 09:10:06 [a7223834ee1c28b62218210a2d51ff914bd15d6404d2ae58e227e356c00725a4]
 Sep 09 09:10:08 client sh[2656]: Pruning archive: client-2020-09-09-09-09              Wed, 2020-09-09 09:09:23 [1f421766a3511dfe33c66d7dfc8b460a62a0c6940d330dd6656a9f38babab5ec] (1/1)
-Sep 09 09:10:08 client sh[2656]: Keeping archive: client-2020-09-08-18-05              Tue, 2020-09-08 18:05:01 [c15c18927d89d9d6ae57a556a9a7eafbd9e889831ea84057bf6b6833e124dbd6]
 Sep 09 09:10:08 client systemd[1]: Started Start backup script.
 Sep 09 09:15:00 client systemd[1]: Starting Start backup script...
 Sep 09 09:15:03 client sh[2895]: Creating archive at "192.168.111.10:/var/backup::{hostname}-{now:%Y-%m-%d-%H-%M}"
@@ -2691,7 +2689,6 @@ Sep 09 09:15:03 client sh[2895]: Chunk index:                    1291           
 Sep 09 09:15:03 client sh[2895]: ------------------------------------------------------------------------------
 Sep 09 09:15:05 client sh[2895]: Keeping archive: client-2020-09-09-09-15              Wed, 2020-09-09 09:15:03 [294203ca51d7cae5f5b72d901ceb1f352836c8e6805876160e6782dcac47021d]
 Sep 09 09:15:05 client sh[2895]: Pruning archive: client-2020-09-09-09-10              Wed, 2020-09-09 09:10:06 [a7223834ee1c28b62218210a2d51ff914bd15d6404d2ae58e227e356c00725a4] (1/1)
-Sep 09 09:15:05 client sh[2895]: Keeping archive: client-2020-09-08-18-05              Tue, 2020-09-08 18:05:01 [c15c18927d89d9d6ae57a556a9a7eafbd9e889831ea84057bf6b6833e124dbd6]
 Sep 09 09:15:05 client systemd[1]: Started Start backup script.
 Sep 09 09:20:00 client systemd[1]: Starting Start backup script...
 Sep 09 09:20:01 client sh[3218]: Creating archive at "192.168.111.10:/var/backup::{hostname}-{now:%Y-%m-%d-%H-%M}"
@@ -2712,6 +2709,5 @@ Sep 09 09:20:02 client sh[3218]: Chunk index:                    1290           
 Sep 09 09:20:02 client sh[3218]: ------------------------------------------------------------------------------
 Sep 09 09:20:03 client sh[3218]: Keeping archive: client-2020-09-09-09-20              Wed, 2020-09-09 09:20:01 [3314823ea68730cf3139d4b249dd5435044e64a4d4ad31cc5c18062c7bc8cd6e]
 Sep 09 09:20:03 client sh[3218]: Pruning archive: client-2020-09-09-09-15              Wed, 2020-09-09 09:15:03 [294203ca51d7cae5f5b72d901ceb1f352836c8e6805876160e6782dcac47021d] (1/1)
-Sep 09 09:20:03 client sh[3218]: Keeping archive: client-2020-09-08-18-05              Tue, 2020-09-08 18:05:01 [c15c18927d89d9d6ae57a556a9a7eafbd9e889831ea84057bf6b6833e124dbd6]
 [root@client /]# 
 ```
