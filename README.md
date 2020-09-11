@@ -2633,7 +2633,7 @@ etc/audit/auditd.conf
 etc/sudoers.d
 etc/sudoers.d/vagrant
 ```
-И наконец посмотрим появился ли удаленный файл, 
+И наконец посмотрим появилась ли уаленная папка вместе с файлами, 
 ```
 [root@client /]# ll /etc/123456789/
 total 0
